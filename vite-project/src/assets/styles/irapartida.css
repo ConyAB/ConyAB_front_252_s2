@@ -1,0 +1,62 @@
+.partida-container {
+    max-width: 900px;
+    margin: 40px auto;
+    padding: 30px 40px;
+    background: #841850;              
+    color: #f5f5f5;
+    border-radius: 14px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.35);
+    text-align: center;
+    line-height: 1.6;
+}
+
+.partida-container h1 {
+    color: #ffb7e0;
+    margin-bottom: 15px;
+    font-weight: 700;
+}
+
+.partida-container .descripcion {
+    max-width: 750px;
+    margin: 10px auto 25px auto;
+    text-align: justify;            
+    text-align-last: center;          
+}
+
+.partida-botones {
+    margin-top: 25px;
+    display: flex;
+    justify-content: center;
+    gap: 25px;
+    flex-wrap: wrap;
+}
+
+.btn-partida {
+    display: inline-block;
+    padding: 14px 24px;
+    font-size: 17px;
+    font-weight: 700;
+    border-radius: 12px;
+    text-decoration: none;
+    transition: 0.25s ease-in-out;
+}
+
+.btn-partida.crear {
+    background: #ffb7e0;        
+    color: #53002c;
+}
+
+.btn-partida.crear:hover {
+    background: #ffb7e0;
+    transform: scale(1.05);
+}
+
+.btn-partida.buscar {
+    background: #ffb7e0;         
+    color: #53002c;
+}
+
+.btn-partida.buscar:hover {
+    background: #ffe0f0;
+    transform: scale(1.05);
+}

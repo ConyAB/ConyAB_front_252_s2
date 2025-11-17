@@ -1,0 +1,76 @@
+.crear-container {
+    max-width: 600px;
+    margin: 40px auto;
+    padding: 30px;
+    background: #ffe6f2;
+    border-radius: 20px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+}
+
+.crear-container h1 {
+    text-align: center;
+    color: #841850;
+    margin-bottom: 20px;
+}
+
+.crear-form {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+.crear-form label {
+    font-weight: 600;
+    display: flex;
+    flex-direction: column;
+    color: #510829;
+}
+
+.crear-form input,
+.crear-form select {
+    padding: 10px;
+    border-radius: 10px;
+    border: 2px solid #d673a3;
+    background: #fff;
+    font-size: 15px;
+}
+
+.checkbox {
+    display: flex;
+    gap: 8px;
+    align-items: center;
+}
+
+.btn-crear {
+    padding: 12px;
+    background: #d45592;
+    border-radius: 10px;
+    color: white;
+    font-weight: bold;
+    border: none;
+    cursor: pointer;
+    transition: 0.25s;
+}
+
+.btn-crear:hover {
+    background: #e673b5;
+    transform: scale(1.05);
+}
+
+.error {
+    background: #ffb5c1;
+    padding: 10px;
+    border-radius: 8px;
+    color: #8a0000;
+    text-align: center;
+    margin-bottom: 15px;
+}
+
+.successMsg {
+    background: #d8ffe0;
+    padding: 10px;
+    border-radius: 8px;
+    color: #006b1b;
+    text-align: center;
+    margin-bottom: 15px;
+}

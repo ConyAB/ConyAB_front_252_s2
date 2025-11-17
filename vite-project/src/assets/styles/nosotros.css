@@ -1,0 +1,43 @@
+/* CONTENEDOR GENERAL */
+.page {
+  max-width: 900px;
+  margin: 40px auto;
+  padding: 25px 35px;
+  background: #841850;       
+  color: #f5f5f5;             
+  border-radius: 14px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.35);
+  text-align: center;        
+  line-height: 1.6;
+}
+
+.page h1,
+.page h2 {
+  color: #ffb7e0;          
+  margin-bottom: 18px;
+  font-weight: 700;
+}
+
+.page p {
+  max-width: 750px;
+  margin: 15px auto;
+  text-align: justify;        
+  text-align-last: center;    
+  word-spacing: normal;
+  letter-spacing: normal;
+}
+.page ul {
+  display: inline-block;  
+  text-align: left;        
+  margin: 20px auto;
+  padding-left: 40px;
+}
+
+.page li {
+  margin-bottom: 10px;
+}
+
+.page li:hover {
+  color: #ffd4ec;
+  transition: 0.2s ease;
+}

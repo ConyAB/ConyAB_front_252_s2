@@ -1,0 +1,79 @@
+.inicio-container {
+    margin: 40px auto;
+    padding: 20px;
+    text-align: center;
+    flex-wrap: wrap;
+    width: 100%;
+    max-width: 100%;
+    box-sizing: border-box;
+}
+
+.inicio-header h1 {
+    font-size: 42px;
+    color: #ffb7e0;
+    margin-bottom: 10px;
+    font-weight: 800;
+}
+
+.inicio-header p {
+    font-size: 18px;
+    max-width: 700px;
+    margin: 0 auto 25px auto;
+    color: #ffe9f8;
+}
+
+.auth-buttons {
+    display: flex;
+    justify-content: center;
+    gap: 15px;
+    margin-bottom: 40px;
+}
+
+.btn {
+    background-color: #ee99cc;
+    color: #100008;
+    padding: 10px 20px;
+    border-radius: 12px;
+    text-decoration: none;
+    font-weight: 700;
+    font-size: 15px;
+    transition: 0.25s ease-in-out;
+}
+
+.btn:hover {
+    background-color: #ffb7e0;
+    transform: scale(1.05);
+}
+
+.descriptions-row {
+    display: flex;
+    justify-content: center;
+    gap: 25px;
+    flex-wrap: wrap;
+    margin-bottom: 50px;
+}
+
+.description {
+    background:#ee99cc; 
+    padding: 25px;
+    width: 300px;
+    border-radius: 14px;
+    box-shadow: 0 3px 8px rgba(0,0,0,0.15);
+    text-align: left;
+}
+
+.description h3 {
+    color: #53002c;
+    margin-bottom: 8px;
+    font-size: 20px;
+    font-weight: 700;
+}
+
+.description p {
+    color: #333;
+    line-height: 1.5;
+}
+
+.reglas-boton {
+    margin-top: 20px;
+}
