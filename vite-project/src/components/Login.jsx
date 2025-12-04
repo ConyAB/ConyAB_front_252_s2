@@ -27,6 +27,28 @@ function Login() {
       localStorage.setItem("token", token);
       localStorage.setItem("userId", response.data.id_usuario);
       localStorage.setItem("username", response.data.username);
+      // registrar socket en el backend
+      try {
+        const socket = new WebSocket("ws://localhost:3000");
+
+        socket.addEventListener("open", () => {
+          console.log("WS conectado desde frontend");
+
+          socket.send(JSON.stringify({
+            type: "register",
+            id_usuario: response.data.id_usuario
+          }));
+        });
+
+        socket.addEventListener("message", (event) => {
+          const data = JSON.parse(event.data);
+          console.log("Mensaje recibido desde WebSocket:", data);
+        });
+        window.globalSocket = socket;
+
+      } catch (e) {
+        console.error("Error con WebSocket:", e);
+      }
 
       setToken(token);
       setUserData({

@@ -2,10 +2,12 @@
     margin: 40px auto;
     padding: 20px;
     text-align: center;
-    flex-wrap: wrap;
+    flex-wrap: wrap; 
     width: 100%;
     max-width: 100%;
     box-sizing: border-box;
+    background: rgba(255, 255, 255, 0.0);
+    backdrop-filter: blur(2px);
 }
 
 .inicio-header h1 {
@@ -77,3 +79,4 @@
 .reglas-boton {
     margin-top: 20px;
 }
+
