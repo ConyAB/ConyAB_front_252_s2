@@ -80,3 +80,19 @@
     margin-top: 20px;
 }
 
+@media (max-width: 768px) {
+
+  .inicio-header h1 {
+    font-size: 32px;
+  }
+
+  .descriptions-row {
+    flex-direction: column;
+    align-items: center;
+    gap: 15px;
+  }
+
+  .description {
+    width: 90%;
+  }
+}

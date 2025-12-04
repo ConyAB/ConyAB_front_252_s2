@@ -60,3 +60,14 @@
     background: #ffe0f0;
     transform: scale(1.05);
 }
+
+@media (max-width: 768px) {
+  .partida-container {
+    padding: 20px;
+  }
+
+  .btn-partida {
+    width: 100%;
+    text-align: center;
+  }
+}

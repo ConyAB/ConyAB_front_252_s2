@@ -99,8 +99,13 @@
     transform: scale(1.07);
 }
 
-@media (max-width: 600px) {
-    .partida-card {
-        width: 90%;
-    }
+@media (max-width: 480px) {
+  .partida-card {
+    padding: 18px;
+  }
+
+  .partida-card h2 {
+    font-size: 20px;
+  }
 }
+

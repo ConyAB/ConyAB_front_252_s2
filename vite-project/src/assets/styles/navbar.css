@@ -65,5 +65,40 @@
   object-fit: contain;
 }
 
+/* ==== NAVBAR RESPONSIVA ==== */
+@media (max-width: 768px) {
+
+  .navbar {
+    flex-direction: column;
+    gap: 12px;
+    padding: 15px;
+  }
+
+  .navbar .titulo {
+    font-size: 32px;
+    text-align: center;
+  }
+
+  .menu {
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+
+  .menu li a {
+    padding: 8px 12px;
+    font-size: 14px;
+  }
+
+  .logo {
+    width: 60px;
+    height: 60px;
+  }
+}
+
+@media (max-width: 480px) {
+  .navbar .titulo {
+    font-size: 26px;
+  }
+}
 
 

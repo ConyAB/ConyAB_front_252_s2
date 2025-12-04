@@ -119,3 +119,9 @@
   transform: scale(1.05);
 }
 
+@media (max-width: 768px) {
+  .Login {
+    width: 90%;
+    padding: 20px;
+  }
+}

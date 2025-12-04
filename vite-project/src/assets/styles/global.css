@@ -77,3 +77,45 @@ body {
   background-attachment: fixed;
   background-position: center;
 }
+
+
+@media (max-width: 1024px) {
+  h1 { font-size: 32px; }
+  h2 { font-size: 26px; }
+  h3 { font-size: 20px; }
+}
+
+@media (max-width: 768px) {
+
+  body {
+    padding: 0 10px;
+  }
+
+  h1 { font-size: 28px; }
+  h2 { font-size: 22px; }
+  h3 { font-size: 18px; }
+
+  .page,
+  .inicio-container,
+  .partida-container,
+  .instrucciones-container,
+  .login-page,
+  .lobby-container {
+      padding: 20px !important;
+      margin: 20px auto !important;
+      width: 100% !important;
+  }
+}
+
+@media (max-width: 480px) {
+
+  h1 { font-size: 24px; }
+  h2 { font-size: 20px; }
+
+  .btn,
+  input,
+  select {
+    font-size: 14px !important;
+    padding: 10px !important;
+  }
+}

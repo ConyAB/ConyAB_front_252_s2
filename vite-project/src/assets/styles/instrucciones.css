@@ -112,4 +112,26 @@
     color: #100008;
 }
 
+@media (max-width: 768px) {
+  .instrucciones-container,
+  .instruccion1-container,
+  .instruccion2-container {
+    padding: 18px !important;
+    width: 95%;
+  }
+
+  .instrucciones-container ul,
+  .instruccion1-container ul {
+    margin-left: 0;
+  }
+}
+
+@media (max-width: 480px) {
+  .instrucciones-container p,
+  .instruccion1-container p,
+  .instruccion2-container p {
+    text-align: left;
+  }
+}
+
 
