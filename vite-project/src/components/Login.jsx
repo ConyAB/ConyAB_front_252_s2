@@ -29,7 +29,7 @@ function Login() {
       localStorage.setItem("username", response.data.username);
       // registrar socket en el backend
       try {
-        const socket = new WebSocket("ws://localhost:3000");
+        const socket = new WebSocket("wss://conyab-back-252-s2.onrender.com");
 
         socket.addEventListener("open", () => {
           console.log("WS conectado desde frontend");

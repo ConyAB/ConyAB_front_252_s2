@@ -1,11 +1,14 @@
-import { useState } from "react";
+import { useContext, useState, useEffect } from "react";
 import axios from "axios";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, Link } from "react-router-dom";
 import Navbar from "../components/NavBar";
 import "../assets/styles/crearpartida.css";
+import { AuthContext } from "./AuthContext";
 
 function CrearPartida() {
   const navigate = useNavigate();
+  const { token, userData } = useContext(AuthContext);
+
   const [nombre, setNombre] = useState("");
   const [maxJugadores, setMaxJugadores] = useState(2);
   const [dificultad, setDificultad] = useState("facil");
@@ -16,17 +19,14 @@ function CrearPartida() {
   const [msg, setMsg] = useState("");
   const [error, setError] = useState(false);
 
+  useEffect(() => {
+    if (!token || !userData?.id_usuario) {
+      navigate("/login");
+    }
+  }, [token, userData, navigate]);
+
   const handleSubmit = async (e) => {
     e.preventDefault();
-
-    const token = localStorage.getItem("token");
-    const userId = localStorage.getItem("userId"); 
-
-    if (!token || !userId) {
-      setError(true);
-      setMsg("Debes iniciar sesión para crear una partida");
-      return;
-    }
 
     try {
       const response = await axios.post(
@@ -41,7 +41,6 @@ function CrearPartida() {
         },
         {
           headers: {
-            "x-user-id": userId,
             Authorization: `Bearer ${token}`,
           },
         }
@@ -49,9 +48,7 @@ function CrearPartida() {
 
       setError(false);
       setMsg("Partida creada correctamente");
-
       navigate(`/lobbypartida/${response.data.partida.id_partida}`);
-
     } catch (err) {
       console.error(err);
       setError(true);
@@ -120,7 +117,7 @@ function CrearPartida() {
           </label>
 
           <label>
-            Numero de turnos máximos:
+            Número de turnos máximos:
             <input
               type="number"
               min="1"
@@ -142,6 +139,11 @@ function CrearPartida() {
           <button type="submit" className="btn-crear">
             Crear partida
           </button>
+
+          <div className="botones-dos">
+            <Link className="btn" to="/">Volver a página principal</Link>
+            <Link className="btn" to="/buscarpartida">Buscar partida</Link>
+          </div>
         </form>
       </div>
     </>
@@ -149,3 +151,4 @@ function CrearPartida() {
 }
 
 export default CrearPartida;
+

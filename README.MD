@@ -6,6 +6,49 @@ cd vite-project
 ```
 Dentro de vite-proyect, solo debes ejecutar:
 ```bash
+yarn install
+```
+Dentro de vite-project crea un archivo .env con:
+```ini
+VITE_BACKEND_URL=https://conyab-back-252-s2.onrender.com
+
+```
+Asegurate de usar node 20, me generaba error eso
+```bash
+nvm use 20
+```
+Ejecutar:
+```bash
 yarn dev
 ```
-Cree la pagina de inicio, instrucciones, nosotros, jugar ahora, crear partida, buscar partida. Todos los link funcionan. Me falto hacer lo de emepzar partida. Tambien no pude hacer el deploy en Netlify, pero no se si fue error mio, o del repositorio, ya que me cobraban, y si accedia a los repositorios de mi github ConyAB, no me aparecia ninguno, el ConyAB_frontend... solo aparecio en github de IIC2153, pero me cobraban para usarlo, espero me puedas ayudar con eso. Pude hacer el deploy de render y esta funcionando
+## Durante el desarrollo se implemento:
+
+### Paginas principales: 
+- Página de Inicio
+- Página de Instrucciones
+- Página Nosotros
+- Vista Jugar ahora (redirige a crear/buscar)
+- Vista Crear partida
+- Vista Buscar partida
+
+### Flujo de partidas:
+- Crear partida
+- Unirse a partida pública
+- Solicitar acceso a partida privada
+- Lobby de partida dinámico
+- Inicio automático de partida por host
+- Creación automática de monstruo según dificultad
+- Reparto de cartas iniciales
+- Panel de jugador (atributos + cartas)
+- Panel de monstruo (con imágenes dinámicas)
+- Acciones básicas: Ataque básico, Daño al jugador según defensa, Derrota de monstruo y generación del siguiente
+
+### Rutas Protegidas:
+Todo el acceso a juego y lobby requiere:
+- token válido
+- usuario autenticado
+- Si el token expira: mensaje claro, redirección automática al login
+
+## Deploy 
+- backend: https://conyab-back-252-s2.onrender.com
+- frontend: https://conyab.netlify.app/

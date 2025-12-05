@@ -113,3 +113,10 @@
     font-size: 14px;
   }
 }
+
+.monstruo-img {
+  width: 180px;
+  height: auto;
+  margin: 10px auto;
+  display: block;
+}

@@ -108,4 +108,25 @@
     font-size: 20px;
   }
 }
+.mensaje-global {
+    margin: 20px auto;
+    padding: 12px 18px;
+    border-radius: 12px;
+    font-weight: 700;
+    max-width: 600px;
+    font-size: 16px;
+    text-align: center;
+}
+
+.mensaje-global.success {
+    background: #4caf50;
+    color: white;
+    box-shadow: 0 2px 8px rgba(0,80,20,0.4);
+}
+
+.mensaje-global.error {
+    background: #ff4d6d;
+    color: white;
+    box-shadow: 0 2px 8px rgba(80,0,0,0.4);
+}
 

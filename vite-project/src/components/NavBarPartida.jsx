@@ -13,9 +13,7 @@ function Navbar() {
       </div>
 
       <ul className="menu">
-        <li><Link to="/">Inicio</Link></li>
-        <li><Link to="/instrucciones">Instrucciones</Link></li>
-        <li><Link to="/nosotros">Nosotros</Link></li>
+        <li><Link to="/irapartida">Salir partida</Link></li>
         <LogoutButton></LogoutButton>
       </ul>
 

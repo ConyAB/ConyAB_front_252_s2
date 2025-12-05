@@ -1,33 +1,45 @@
-import { useEffect, useState } from "react";
+import { useEffect, useState, useContext } from "react";
 import axios from "axios";
 import { useParams, useNavigate } from "react-router-dom";
 import Navbar from "../components/NavBar";
 import "../assets/styles/lobbypartida.css";
+import { AuthContext } from "../components/AuthContext";
 
 function LobbyPartida() {
     const { id } = useParams();
     const navigate = useNavigate();
 
+    const { userData, token } = useContext(AuthContext);
+    const userId = userData?.id_usuario;
+
     const [partida, setPartida] = useState(null);
     const [tiempo, setTiempo] = useState(90);
-    const [error, setError] = useState("");
 
-    const [hostName, setHostName] = useState("");  
+    const [error, setError] = useState("");
+    const [mensaje, setMensaje] = useState("");
+
+    const [loading, setLoading] = useState(false);
+
+    const [hostName, setHostName] = useState("");
     const [jugadoresNombres, setJugadoresNombres] = useState({});
 
-    const userId = localStorage.getItem("userId");
-    const token = localStorage.getItem("token");
-
-    const [tiempoTerminado, setTiempoTerminado] = useState(false);
 
     const cargarPartida = async () => {
         try {
-        const res = await axios.get(
-            `${import.meta.env.VITE_BACKEND_URL}/partidas/${id}`
-        );
-        setPartida(res.data);
+            const res = await axios.get(
+                `${import.meta.env.VITE_BACKEND_URL}/partidas/${id}`,
+                { headers: { Authorization: `Bearer ${token}` } }
+            );
+
+            setPartida(res.data);
+            setError("");
         } catch (err) {
-        setError("Error cargando la partida");
+            if (err.response?.status === 401) {
+                setError("Tu sesión expiró. Inicia sesión nuevamente.");
+                navigate("/login");
+                return;
+            }
+            setError("Error cargando la partida.");
         }
     };
 
@@ -37,25 +49,27 @@ function LobbyPartida() {
         return () => clearInterval(intervalo);
     }, []);
 
-
     useEffect(() => {
         if (partida?.id_host) {
         axios
-            .get(`${import.meta.env.VITE_BACKEND_URL}/usuarios/${partida.id_host}`)
-            .then((res) => {
-            setHostName(res.data.username); 
-            })
-            .catch(() => {
-            setHostName("Host desconocido");
-            });
+            .get(
+            `${import.meta.env.VITE_BACKEND_URL}/usuarios/${partida.id_host}`,
+            { headers: { Authorization: `Bearer ${token}` } }
+            )
+            .then((res) => setHostName(res.data.username))
+            .catch(() => setHostName("Host desconocido"));
         }
-    }, [partida]);
+    }, [partida, token]);
+
 
     useEffect(() => {
         if (partida?.jugadores?.length > 0) {
         partida.jugadores.forEach((j) => {
             axios
-            .get(`${import.meta.env.VITE_BACKEND_URL}/usuarios/${j.id_usuario}`)
+            .get(
+                `${import.meta.env.VITE_BACKEND_URL}/usuarios/${j.id_usuario}`,
+                { headers: { Authorization: `Bearer ${token}` } }
+            )
             .then((res) => {
                 setJugadoresNombres((prev) => ({
                 ...prev,
@@ -72,42 +86,52 @@ function LobbyPartida() {
         }
     }, [partida]);
 
+
     useEffect(() => {
-        if (tiempo <= 0) {
-            setTiempoTerminado(true);
-            setTimeout(() => {navigate("/");}, 3000);
-            return;
+        if (partida?.estado === "en curso") {
+        navigate(`/partida/${id}/juego`);
         }
+    }, [partida, id, navigate]);
 
-        const timer = setTimeout(() => {
-        setTiempo((t) => t - 1);
-        }, 1000);
-
-        return () => clearTimeout(timer);
-    }, [tiempo]);
 
     const iniciarPartida = async () => {
         try {
-        await axios.post(
+        setLoading(true);
+        setMensaje("");
+
+        const resInicio = await axios.post(
             `${import.meta.env.VITE_BACKEND_URL}/partidas/iniciar/${id}`,
             {},
-            {
-            headers: {
-                "x-user-id": userId,
-                Authorization: `Bearer ${token}`,
-            },
-            }
+            { headers: { Authorization: `Bearer ${token}` } }
+        );
+
+        const resPartida = await axios.get(
+            `${import.meta.env.VITE_BACKEND_URL}/partidas/${id}`,
+            { headers: { Authorization: `Bearer ${token}` } }
+        );
+
+        const dificultad = resPartida.data.dificultad;
+
+        await axios.post(
+            `${import.meta.env.VITE_BACKEND_URL}/monstruos/crear`,
+            { id_partida: id, dificultad },
+            { headers: { Authorization: `Bearer ${token}` } }
         );
 
         navigate(`/partida/${id}/juego`);
+
         } catch (err) {
-        setError(err.response?.data?.error || "Error al iniciar partida");
+        console.error(err);
+        setError(err.response?.data?.error || "No se pudo iniciar la partida.");
+        } finally {
+        setLoading(false);
         }
     };
 
-    if (!partida) return <p>Cargando partida...</p>;
 
-    const esHost = partida.id_host == userId;
+    if (!partida) return <p className="loading">Cargando partida...</p>;
+
+    const esHost = partida.id_host === userId;
     const jugadores = partida.jugadores || [];
 
     return (
@@ -115,33 +139,33 @@ function LobbyPartida() {
         <Navbar />
 
         <div className="lobby-container">
-            <h1>Lobby de la partida: {partida.nombre}</h1>
 
-            <div className="config-box">
-            <p><strong>Dificultad:</strong> {partida.dificultad}</p>
-            <p><strong>Jugadores máximos:</strong> {partida.max_jugadores}</p>
-            <p><strong>Monstruos:</strong> {partida.monstruos}</p>
-            <p><strong>Turnos máximos:</strong> {partida.turnosMaximos}</p>
-            <p><strong>Host:</strong> {hostName}</p>
-            </div>
+            {error && <p className="mensaje-error">{error}</p>}
+            {mensaje && <p className="mensaje-ok">{mensaje}</p>}
+
+            <h1>Partida: {partida.nombre} (Host: {hostName})</h1>
 
             <h2>Jugadores conectados:</h2>
-
             <ul className="jugadores-lista">
             {jugadores.map((j) => (
-                <li key={j.id_usuario}>
-                {jugadoresNombres[j.id_usuario]}
-                </li>
+                <li key={j.id_usuario}>{jugadoresNombres[j.id_usuario]}</li>
             ))}
             </ul>
 
-            <h3>Tiempo restante: {tiempo}s</h3>
-
-            {error && <p className="error">{error}</p>}
+            <div className="config-box">
+            <p><strong>Modo:</strong> {partida.dificultad}</p>
+            <p><strong>Jugadores máximos:</strong> {partida.max_jugadores}</p>
+            <p><strong>Monstruos:</strong> {partida.monstruos}</p>
+            <p><strong>Turnos máximos:</strong> {partida.turnosMaximos}</p>
+            </div>
 
             {esHost && jugadores.length >= 2 && (
-            <button className="btn-iniciar" onClick={iniciarPartida}>
-                Iniciar partida
+            <button
+                className="btn-iniciar"
+                onClick={iniciarPartida}
+                disabled={loading}
+            >
+                {loading ? "Iniciando..." : "Iniciar partida"}
             </button>
             )}
 
@@ -154,5 +178,3 @@ function LobbyPartida() {
 }
 
 export default LobbyPartida;
-
-

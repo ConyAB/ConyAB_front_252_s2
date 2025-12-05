@@ -1,5 +1,6 @@
 import "../assets/styles/nosotros.css";
 import Navbar from '../components/NavBar.jsx';
+import { Link } from "react-router-dom";
 
 function Nosotros() {
   return (
@@ -16,6 +17,9 @@ function Nosotros() {
       <ul>
         <li>Constanza (ConyAB) — Fullstack Developer y Diseñadora del Juego</li>
       </ul>
+    <div className="botones">
+          <Link className="btn" to="/">Volver a pagina principal</Link>
+    </div>
     </div>
     </div>
   );

@@ -1,8 +1,17 @@
+import { useContext, useEffect } from "react";
+import { useNavigate, Link } from "react-router-dom";
 import Navbarsession from "../components/NavBarSession.jsx";
 import "../assets/styles/irapartida.css";
-import { Link } from "react-router-dom";
+import { AuthContext } from "../components/AuthContext.jsx";
 
 function IrAPartida() {
+  const navigate = useNavigate();
+  const { token, userData } = useContext(AuthContext);
+  useEffect(() => {
+    if (!token || !userData?.id_usuario) {
+      navigate("/login");
+    }
+  }, [token, userData, navigate])
   return (
     <div>
       <Navbarsession />

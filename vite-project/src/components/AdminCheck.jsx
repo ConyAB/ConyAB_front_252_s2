@@ -1,6 +1,6 @@
 import React, { useEffect, useState , useContext} from 'react';
 import axios from 'axios';
-import { AuthContext } from '../auth/AuthContext';
+import { AuthContext } from './AuthContext';
 
 const AdminCheck = () => { 
   const { token } = useContext(AuthContext)

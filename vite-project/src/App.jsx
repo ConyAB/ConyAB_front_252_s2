@@ -1,5 +1,6 @@
 import { useState } from 'react'
 import './App.css' 
+import LogoutButton from './components/Logout'
 
 function App() {
   const [count, setCount] = useState(0)
@@ -28,6 +29,7 @@ function App() {
       </p>
       <a href='/welcome'>Ir a User Welcome</a>
       <a href='/instruction'>Ir a Instructions</a>
+      <LogoutButton></LogoutButton>
     </>
   )
 }
